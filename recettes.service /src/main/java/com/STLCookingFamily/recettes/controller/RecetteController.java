@@ -76,15 +76,19 @@ public class RecetteController {
      * @return
      */
     //RequestBody le parametre fait parti du body
-    @PostMapping("/recettes")
+    @PostMapping("/newRecette")
+    //public ResponseEntity<Recette> createRecette(@RequestBody Recette recette) {
     public ResponseEntity<Recette> createRecette(@RequestBody Recette recette) {
-        try {
-            Recette _recette = recetteRepository
-                    .save(new Recette(recette.getTitle(), recette.getDescription(), recette.getIngredients(), false));
-            return new ResponseEntity<>(_recette, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+       // if (recette!= null) {
+
+            try {
+                Recette _recette = recetteRepository
+                        .save(new Recette(recette.getTitle(), recette.getDescription(), recette.getIngredients(), recette.getAuteurId(),recette.getPhotoId(), false));
+                return new ResponseEntity<>(_recette, HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+      //  }
     }
 
     /**
